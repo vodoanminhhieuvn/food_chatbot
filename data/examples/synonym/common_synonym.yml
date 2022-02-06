@@ -1,0 +1,11 @@
+version: "3.0"
+
+nlu:
+  - synonym: or
+    examples: |
+      - or
+      - -
+      - |
+      - Or
+      - OR
+      - oR

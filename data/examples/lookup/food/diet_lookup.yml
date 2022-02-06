@@ -1,0 +1,22 @@
+version: "3.0"
+
+nlu:
+  - lookup: diet
+    examples: |
+      - balanced
+      - high-protein
+      - high-fiber
+      - low-carb
+      - low-fat
+      - low-sodium
+      - Gluten Free
+      - Ketogenic
+      - Vegetarian
+      - Lacto-Vegetarian
+      - Ovo-Vegetarian
+      - Vegan
+      - Pescetarian
+      - Paleo
+      - Primal
+      - Low FODMAP
+      - Whole30
