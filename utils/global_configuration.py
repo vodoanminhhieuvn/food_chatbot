@@ -16,16 +16,17 @@ class EdamamApiConfigModel(BaseModel):
     searchUrl: str
 
 
-class RequestApiConfigModel(BaseModel):
-    spoonApi: SpoonApiConfigModel
-    edamamApi: EdamamApiConfigModel
-
-
 class GlobalConfiguration:
-    request_api_config: RequestApiConfigModel
+    edamam_api_config: EdamamApiConfigModel
+    spooncular_api_config: SpoonApiConfigModel
 
-    def set_config(self):
+    @classmethod
+    def set_config(cls):
         file: TextIO
-        with open('assets/api_key/api_key.json') as file:
-            data = json.load(file)
-            self.request_api_config = RequestApiConfigModel(**data)
+        with open('assets/api/edamam.json') as file:
+            edamam_config = json.load(file)
+            cls.edamam_api_config = EdamamApiConfigModel(**edamam_config)
+
+        with open('assets/api/spooncular.json') as file:
+            spooncular_config = json.load(file)
+            cls.spooncular_api_config = SpoonApiConfigModel(**spooncular_config)
