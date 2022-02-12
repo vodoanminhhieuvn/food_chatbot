@@ -2,8 +2,6 @@ version: "3.0"
 
 entities:
   - ingredient
-  - ingredientReg
-  - preparation_technique
   - or
   - nutrient
   - min

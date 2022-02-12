@@ -18,24 +18,44 @@ class ActionSetIngredient(Action):
             domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
 
-        list_ingredient: List[str] = []
         tracker.latest_message['entities'] = sorted(tracker.latest_message['entities'], key=lambda i: i['start'])
         message_tracker: MessageTracker = MessageTracker(**tracker.latest_message)
 
-        current_index: int = 0
-        entity: Entity
-        for entity in message_tracker.entities:
-            if entity.type == 'or' and list_ingredient[current_index]:
-                current_index += 1
+        # Check should clear list entity
+        if slot.recipe_parts_slots.check_should_clear(message_tracker.entities):
+            slot.recipe_parts_slots.parts = []
 
-            if entity.type == 'ingredient':
-                try:
-                    list_ingredient[current_index] += f"{entity.value} "
-                except IndexError:
-                    list_ingredient.append(entity.value)
+        # Update recipe parts
+        slot.recipe_parts_slots.append_list(message_tracker.entities)
+        # Sort list
+        slot.recipe_parts_slots.filter_parts()
 
-        slot.set_list_ingredient(list_ingredient)
+        # Check for missing components => utter request
+        if self.request_more_part(dispatcher, slot.recipe_parts_slots.parts):
+            return []
 
-        print(slot.list_ingredients)
+        # Else
+        # Run handle creating search keywords by rule
+        print(slot.recipe_parts_slots.parts)
+        slot.recipe_search_keyword_slots = (
+            slot.recipe_parts_slots.create_search_keywords()
+        )
 
+        # result utter
+        dispatcher.utter_message("Your search is:")
+        for item in slot.recipe_search_keyword_slots:
+            dispatcher.utter_message(item)
         return []
+
+    @staticmethod
+    def request_more_part(
+            dispatcher: CollectingDispatcher, recipe_parts: list
+    ) -> bool:
+        if all(item.type != "ingredient" for item in recipe_parts):
+            dispatcher.utter_message(text="Give me main ingredient")
+            return True
+        elif all(item.type != "cook_technique" for item in recipe_parts):
+            dispatcher.utter_message(text="You can provide me a cook technique")
+            return True
+        else:
+            return False
