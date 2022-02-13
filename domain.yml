@@ -25,9 +25,10 @@ intents:
   - mood_unhappy
   - bot_challenge
   - set_ingredients
-
+  - help_get_recipe
 actions:
   - action_set_ingredients
+  - action_help_get_recipe
 
 responses:
   utter_greet:
