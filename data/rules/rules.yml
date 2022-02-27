@@ -17,6 +17,11 @@ rules:
       - intent: set_ingredients
       - action: action_set_ingredients
 
+  - rule: Response[Get-Recipe] -> [Get-Recipe-Intent]
+    steps:
+      - intent: get_recipe
+      - action: action_get_recipe
+
   - rule: Response[Help-Get-Recipe] -> [Help_Get_Recipe-Intent]
     steps:
       - intent: help_get_recipe
