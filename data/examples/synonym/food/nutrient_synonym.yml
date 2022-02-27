@@ -1,0 +1,19 @@
+version: "3.0"
+nlu:
+  - synonym: Nutrient
+    examples: |
+      - nutrient
+      - nuTrient
+  - synonym: calories
+    examples: |
+      - calory
+      - calories
+      - Calories
+      - calo
+      - energy
+  - synonym: fat
+    examples: |
+      - fatty
+      - fat
+      - fAt
+      - faT

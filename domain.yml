@@ -25,10 +25,13 @@ intents:
   - set_ingredients
   - help_get_recipe
   - get_recipe
+  - set_nutrient
+
 actions:
   - action_set_ingredients
   - action_get_recipe
   - action_help_get_recipe
+  - action_set_nutrient
 
 responses:
   utter_greet:

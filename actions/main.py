@@ -5,4 +5,4 @@ from utils.global_configuration import GlobalConfiguration
 
 GlobalConfiguration.set_config()
 
-print("Activate config")
+print("Activated config")

@@ -26,3 +26,8 @@ rules:
     steps:
       - intent: help_get_recipe
       - action: action_help_get_recipe
+
+  - rule: Response[Action-Set-Nutrient] -> [Set-Nutrient]
+    steps:
+      - intent: set_nutrient
+      - action: action_set_nutrient

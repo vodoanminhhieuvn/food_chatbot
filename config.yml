@@ -30,6 +30,7 @@ policies:
   - max_history: 6
     name: AugmentedMemoizationPolicy
   - name: TEDPolicy
+    constrain_similarities: True
     max_history: 10
     epochs: 100
     batch_size:
