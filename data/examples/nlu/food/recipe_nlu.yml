@@ -1,6 +1,18 @@
 version: "3.0"
 
 nlu:
+  - intent: get_recipe
+    examples: |
+      - Get me recipe
+      - Apply recipe food
+      - Done
+      - Go searching
+      - Get me food
+      - Find some food
+      - Find recipe
+      - Show me some recipes
+      - Do we have any recipe?
+      - Take me a look recipes
   - intent: help_get_recipe
     examples: |
       - How can i get recipe

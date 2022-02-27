@@ -14,8 +14,8 @@ class NetworkUtil:
     @staticmethod
     def request(url: str, params: Optional[any], method: NetworkMethod):
         if method == NetworkMethod.GET:
-            requests.get(url, params=params)
+            return requests.get(url, params=params)
         elif method == NetworkMethod.POST:
-            requests.post(url, params=params)
+            return requests.post(url, params=params)
         elif method == NetworkMethod.PUT:
-            requests.put(url, params=params)
+            return requests.put(url, params=params)

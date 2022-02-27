@@ -4,6 +4,7 @@ from typing import Dict
 from requests import Response
 
 from api.network_util import NetworkUtil, NetworkMethod
+from base_models.food_model.nutrient_model import NutrientModel
 from utils.global_configuration import GlobalConfiguration
 
 
@@ -21,6 +22,8 @@ class GetApi:
     @staticmethod
     def request_edamam(edamam_method: EdamamMethod, params: Dict[str, any]) -> Response:
         response: Response
+        params.update(load_edamam_config())
+        print(GlobalConfiguration.edamam_api_config.searchUrl)
 
         if edamam_method == EdamamMethod.GET_RECIPES:
             response = NetworkUtil.request(GlobalConfiguration.edamam_api_config.searchUrl, params=params,

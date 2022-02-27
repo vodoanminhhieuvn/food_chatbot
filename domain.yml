@@ -26,8 +26,10 @@ intents:
   - bot_challenge
   - set_ingredients
   - help_get_recipe
+  - get_recipe
 actions:
   - action_set_ingredients
+  - action_get_recipe
   - action_help_get_recipe
 
 responses:
