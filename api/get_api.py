@@ -19,14 +19,14 @@ class SpooncularMethod(enum.Enum):
 
 class GetApi:
     @staticmethod
-    def request_edamam(edamam_method: EdamamMethod):
+    def request_edamam(edamam_method: EdamamMethod, params: Dict[str, any]) -> Response:
         response: Response
 
         if edamam_method == EdamamMethod.GET_RECIPES:
-            response = NetworkUtil.request(GlobalConfiguration.edamam_api_config.searchUrl, params=[],
+            response = NetworkUtil.request(GlobalConfiguration.edamam_api_config.searchUrl, params=params,
                                            method=NetworkMethod.GET)
         else:
-            response = NetworkUtil.request(GlobalConfiguration.spooncular_api_config.generateMealUrl, params=[],
+            response = NetworkUtil.request(GlobalConfiguration.edamam_api_config.searchUrl, params=params,
                                            method=NetworkMethod.GET)
 
         return response
@@ -45,7 +45,7 @@ class GetApi:
         return response
 
 
-def load_edamam_config() -> Dict[str, str]:
+def load_edamam_config() -> Dict[str, any]:
     return {
         "app_id": GlobalConfiguration.edamam_api_config.id,
         "app_key": GlobalConfiguration.edamam_api_config.key,
@@ -53,7 +53,23 @@ def load_edamam_config() -> Dict[str, str]:
     }
 
 
-def load_spooncular_config() -> Dict[str, str]:
+def load_spooncular_config() -> Dict[str, any]:
     return {
         "apiKey": GlobalConfiguration.spooncular_api_config.key,
+    }
+
+
+def get_food_recipe(search_params: str, nutrient_info: NutrientModel) -> Dict[str, any]:
+    return {
+        "q": search_params,
+        "calories": f"{nutrient_info.minCalories}-{nutrient_info.maxCalories}",
+        "fat": f"{nutrient_info.minFat}-{nutrient_info.maxFat}"
+    }
+
+
+def get_meal_plan() -> Dict[str, any]:
+    return {
+        "query": "Query",
+        "targetCalories": 2000,
+        "diet": "Vegan",
     }
